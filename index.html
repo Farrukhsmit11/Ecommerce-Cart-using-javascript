@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="items-container">
+        <div class="col-12 col-sm-12 col-md-7 col-lg-7 ">
+            <div class="shopping-cart-container">
+                <div class="row">
+                    <h2 class="shopping-cart-title">Shopping Bag</h2>
+                    <hr>
+                    <div class="shopping-cart">
+                        <!-- onclick="viewDetails(0)" -->
+
+                        <div class="cart-items">
+                            <i class="fa-solid fa-xmark cross-icon" onclick="viewDetails"></i>
+                            <i class="fa-solid fa-heart heart-icon"></i>
+                            <img class="shoes1-img" src="Images/shoes img1.webp">
+                            <div class="product-info">
+                                <h1>Common Projects Bball High</h1>
+                                <p>White</p>
+                            </div>
+                            <div class="buttons">
+                                <button class="add-button" onclick="updateQuantity('increment', 1, 599)">+</button>
+                                <span id="count1">1</span>
+                                <button class="decrease-button" onclick="updateQuantity('decrement',1,599)">-</button>
+                                <span id="price1" class="price" onclick="multiply()">599</span>
+                            </div>
+                        </div>
+
+
+                        <!-- onclick="viewDetails(0)" -->
+                        <div class="cart-items">
+                            <i class="fa-solid fa-xmark cross-icon"></i>
+                            <i class="fa-solid fa-heart  heart-icon"></i>
+                            <img class="shoes1-img" src="Images/shoes img2.jpg" alt="Nike Original Sneakers">
+                            <div class="product-info">
+                                <h1>Nike Original Sneakers</h1>
+                                <p>Red</p>
+                            </div>
+                            <div class="buttons">
+                                <button class="add-button" onclick="updateQuantity ('increment' , 2, 870)">+</button>
+                                <span id="count2">1</span>
+                                <button class="decrease-button"
+                                    onclick="updateQuantity('decrement' , 2, 870)">-</button>
+                                <span id="price2" class="price" onclick="multiply() ">870</span>
+                            </div>
+                        </div>
+
+
+                        <!-- onclick="viewDetails(0)" -->
+                        <div class="cart-items bdr-none">
+                            <i class="fa-solid fa-xmark cross-icon"></i>
+                            <i class="fa-solid fa-heart heart-icon"></i>
+                            <img class="shoes1-img" src="Images/shoes img 3.avif">
+                            <div class="product-info">
+                                <h1>Apple Smart Watch</h1>
+                                <p>Series 10</p>
+                            </div>
+                            <div class="buttons">
+                                <button class="add-button" onclick="updateQuantity('increment' ,3 , 999)">+</button>
+                                <span id="count3">1</span>
+                                <button class="decrease-button" onclick="updateQuantity('decrement' ,3, 999)">-</button>
+                                <span id="price3" class="price">999</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+            <div class="cart-summary">
+                <div class="container">
+                    <div class="row">
+                        <div class="summary-box">
+                            <h1>Summary</h1>
+
+                            <div class="details">
+                                <div class="details-item">
+                                    <span class="label">Subtotal (1 Items)</span>
+                                    <span class="value">$10.00</span>
+                                </div>
+
+                                <div class="details-item">
+                                    <span class="label">Shipping Discount</span>
+                                    <span class="value">-$2.00</span>
+                                </div>
+
+                                <div class="details-item">
+                                    <span class="label">Shipping & Handling</span>
+                                    <span class="value">$4.00</span>
+                                </div>
+
+
+                                <div class="details-item">
+                                    <span class="label">Tax (Calculated at Checkout)</span>
+                                    <span class="value">$0.00</span>
+                                </div>
+
+                                <hr>
+
+                                <div class="details-item-total">
+                                    <span class="label">Balance</span>
+                                    <span class="value">$10.00</span>
+                                </div>
+                                <a href="#"><button class="checkout-button">Checkout </button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="cart.js"></script>
+</body>
+
+</html>
