@@ -30,7 +30,7 @@ function myMap(items) {
    return items.map((item, index) => {
       return `
       <div class="cart-items">
-            <i class="fa-solid fa-xmark cross-icon" onclick="viewDetails(${index})"></i>
+            <i class="fa-solid fa-xmark cross-icon" onclick="viewDetails(${item?._id})"></i>
             <i class="fa-solid fa-heart heart-icon"></i>
             <img class="shoes1-img" src="${item.imgURL}" alt="${item.name}">
             <div class="product-info">
@@ -38,15 +38,17 @@ function myMap(items) {
                <p>${item.color}</p>
             </div>
             <div class="buttons">
-               <button class="add-button" onclick="updateQuantity('increment', ${index}, ${item.price})">+</button>
-               <span id="count${index}">1</span>
-               <button class="decrease-button" onclick="updateQuantity('decrement', ${index}, ${item.price})">-</button>
-               <span id="price${index}" class="price">${item.price}</span>
+               <button class="add-button" onclick="updateQuantity('increment', ${item?._id}, ${item.price})">+</button>
+               <span id="count${item?._id}">1</span>
+               <button class="decrease-button" onclick="updateQuantity('decrement', ${item?._id}, ${item.price})">-</button>
+               <span id="price${item?._id}" class="price">${item.price}</span>
             </div>
          </div>
       `;
    });
 }
+
+
 
 
 function rendercartitems() {
@@ -55,10 +57,6 @@ function rendercartitems() {
 }
 
 
-function viewDetails(index) {
-   console.log(items[index]);
-}
-
 rendercartitems();
 
 
@@ -66,7 +64,7 @@ const num1 = document.getElementById("num1");
 
 
 function updateQuantity(type = 'increment', id, price) {
-   // function updateQuantity(type = 'increment', obj) {
+   // function updateQuantity(type = 'increment', id, price, obj) {
    // const id = obj?._id;
    // const price = obj?.price;
    const countspan = document.getElementById(`count${id}`);
@@ -87,21 +85,36 @@ function updateQuantity(type = 'increment', id, price) {
    const Totalprice = price * currentcount;
 
    PriceElement.textContent = parseFloat(Totalprice);
-
    Totalprice.toFixed(0);
+   updateSummary();
 }
 
 
 
 function updateSummary() {
-   let count1 = document.getElementById('count1').textContent
-   let count2 = document.getElementById('count2').textContent
-   let count3 = document.getElementById('count3').textContent
+   let subTotal = 0;    // store total sum of the item prices
+   items?.forEach(item => {
+      let priceElement = document.getElementById(`price${item?._id}`);
+      let value = parseFloat(priceElement.textContent);
+      subTotal += value;
+   })
 
-   let subtotal = count1 + count2 + count3;
+   let discount = -2.00;
+   let Shipping = 4.00;
+   let Tax = 0.00;
+   let Balance = 10.00
 
-   subtotal = subtotal + Shipping-Discount + Shipping & Handling
+   let balance = subTotal + discount + Shipping + Balance
 
-   console.log(subtotal);
+   document.getElementById('total').textContent = subTotal.toFixed(2);
+   document.getElementById('Discount').textContent = subTotal.toFixed(2);
+   document.getElementById('Shipping').textContent = subTotal.toFixed(2)
+   document.getElementById('Tax').textContent = subTotal.toFixed(2);
+   document.getElementById('Balance').textContent = subTotal.toFixed(2);
 
+   document.getElementById('total').textContent = subTotal;
+
+   document.getElementById('subtotal');
+
+   console.log("Updated Summary:", subTotal, discount, Shipping, Tax, balance);
 }
