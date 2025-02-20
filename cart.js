@@ -1,4 +1,4 @@
-const items = [
+let items = [
    {
       _id: 1,
       name: "Shoes1",
@@ -40,7 +40,7 @@ function myMap(items) {
             <div class="buttons">
                <button class="add-button" onclick="updateQuantity('increment', ${item?._id}, ${item.price})">+</button>
                <span id="count${item?._id}">1</span>
-               <button class="decrease-button" onclick="updateQuantity('decrement', ${item?._id}, ${item.price})">-</button>
+               <button class="decrease-button" onclick="updateQuantity('decrement', ${item?._id}, ${item.price}, ${index});">-</button>
                <span id="price${item?._id}" class="price">${item.price}</span>
             </div>
          </div>
@@ -50,71 +50,72 @@ function myMap(items) {
 
 
 
-
 function rendercartitems() {
    const shoppingcart = document.getElementById('shopping-cart');
    shoppingcart.innerHTML = (myMap(items));
 }
 
-
 rendercartitems();
-
-
 const num1 = document.getElementById("num1");
 
 
-function updateQuantity(type = 'increment', id, price) {
-   // function updateQuantity(type = 'increment', id, price, obj) {
-   // const id = obj?._id;
-   // const price = obj?.price;
+function updateQuantity(type, id, price, index) {
    const countspan = document.getElementById(`count${id}`);
 
    const PriceElement = document.getElementById(`price${id}`);
 
    let currentcount = parseFloat(countspan.textContent);
 
+
    if (type === 'increment') {
       currentcount = currentcount + 1;
 
-   } else if (type === 'decrement' && currentcount !== 1) {
-      currentcount = currentcount - 1;
+   } else if (type === 'decrement') {
+      if (currentcount > 1) {
+         console.log('call');
+
+         currentcount = currentcount - 1;
+      } else {
+         removeItem(index)
+      }
    }
 
    countspan.textContent = currentcount;
 
    const Totalprice = price * currentcount;
-
    PriceElement.textContent = parseFloat(Totalprice);
-   Totalprice.toFixed(0);
+   Totalprice.toFixed(2);
    updateSummary();
 }
 
 
 
+
+function removeItem(index) {
+   console.log(index, "index")
+   items.splice(index, 1)
+   rendercartitems();
+}
+
+
+
 function updateSummary() {
-   let subTotal = 0;    // store total sum of the item prices
+   let subTotal = 0;  
    items?.forEach(item => {
       let priceElement = document.getElementById(`price${item?._id}`);
       let value = parseFloat(priceElement.textContent);
       subTotal += value;
    })
 
-   let discount = -2.00;
+   let discount = 2.00;
    let Shipping = 4.00;
-   let Tax = 0.00;
-   let Balance = 10.00
 
-   let balance = subTotal + discount + Shipping + Balance
+   let total = subTotal - discount + Shipping
 
    document.getElementById('total').textContent = subTotal.toFixed(2);
-   document.getElementById('Discount').textContent = subTotal.toFixed(2);
-   document.getElementById('Shipping').textContent = subTotal.toFixed(2)
-   document.getElementById('Tax').textContent = subTotal.toFixed(2);
-   document.getElementById('Balance').textContent = subTotal.toFixed(2);
+   document.getElementById('Discount').textContent = discount.toFixed(2);
+   document.getElementById('Shipping').textContent = Shipping.toFixed(2);
+   document.getElementById('Balance').textContent = total.toFixed(2);
 
-   document.getElementById('total').textContent = subTotal;
-
-   document.getElementById('subtotal');
-
-   console.log("Updated Summary:", subTotal, discount, Shipping, Tax, balance);
+   console.log(subTotal, discount, Shipping,  total);
 }
